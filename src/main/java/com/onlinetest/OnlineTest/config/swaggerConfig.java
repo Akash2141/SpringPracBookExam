@@ -1,14 +1,16 @@
 package com.onlinetest.OnlineTest.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
 @EnableSwagger2
@@ -16,9 +18,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class swaggerConfig {
 	
 	private static final String SWAGGER_API_VERSION="1.0";
-	private static final String LICENCE_TEXT="LICENCE";
-	private static final String title="products Rest APi";
-	private static final String description = "Restful API for Products";
+	private static final String LICENCE_TEXT="LICENCE number:-20.40.9.3";
+	private static final String title="Online Test Application";
+	private static final String description = "Online Test Applications method has been displayed";
 	
 	private ApiInfo apiInfo() {
 		
@@ -31,12 +33,13 @@ public class swaggerConfig {
 		
 	}
 	
+	@Bean
 	public Docket productAPI() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(apiInfo())
-				.pathMapping("/")
 				.select()
-				.paths()
+				.apis(RequestHandlerSelectors.basePackage("com.onlinetest.OnlineTest.controller"))
+				.paths(regex("/books.*"))
 				.build();
 	}
 

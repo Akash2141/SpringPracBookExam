@@ -1,9 +1,16 @@
 package com.onlinetest.OnlineTest.controller;
 
 import com.onlinetest.OnlineTest.service.*;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +29,7 @@ import com.onlinetest.OnlineTest.Entity.book;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@Api(value="Books Controller",description="Books Controller")
 public class BookResource {
 	
 	public static final Logger log=LoggerFactory.getLogger(BookResource.class);
@@ -31,6 +39,7 @@ public class BookResource {
 	
 	@PostMapping("/books")
 	@ResponseBody
+	@ApiOperation("store the book Info")
 	public String postBook(@RequestBody book book) {
 		service.insert(book);
 		return "I am inserted";
@@ -39,26 +48,34 @@ public class BookResource {
 	
 	@GetMapping("/books")
 	@ResponseBody
+	@ApiOperation("Get the List of All the Books")
+	@ApiResponses(
+			value= {
+					@ApiResponse(code=200,message="You have successfully fetched the data"),
+					@ApiResponse(code=404,message="Books are not Found")
+			})
 	public List<book> getBook(){
 		return service.getBook();
 	}
 	
 	@GetMapping("/books/{id}")
 	@ResponseBody
+	@ApiOperation("Get the product with specific id")
 	public Optional<book> getSpecificBook(@PathVariable int id) {
 		return service.getSpecificBook(id);
 	}
 	
 	@DeleteMapping("/books/{id}")
 	@ResponseBody
+	@ApiOperation("Delete the book with the help of Specific Id")
 	public void delBook(@PathVariable int id) {
-		
 		service.delBook(id);
 		log.info("Successfully deleted");
 		
 	}
 	@PutMapping("/books")
 	@ResponseBody
+	@ApiOperation("Update the Books Info")
 	public void upBook(@RequestBody book book) {
 		
 		service.upBook(book);
