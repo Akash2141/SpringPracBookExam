@@ -8,7 +8,5 @@ import com.onlinetest.OnlineTest.Entity.book;
 @Repository
 @CrossOrigin(origins = "http://localhost:4200")
 public interface bookRepository extends JpaRepository<book, Integer> {
-	
-	book findOneByBookName(String bookname);
 
 }

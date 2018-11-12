@@ -27,14 +27,20 @@ public class book implements Serializable{
 	public book() {
 		super();
 	}
-	public book(String name) {
-		super();
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
 		this.name = name;
 	}
+
 	public int getId() {
 		return id;
 	}
 	public String getName() {
 		return name;
 	}
+	
 }
