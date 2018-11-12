@@ -7,12 +7,15 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.onlinetest.OnlineTest.Entity.book;
 
 @Service
-public class service {
+public class service implements UserDetailsService{
 	
 	public static final Logger log=LoggerFactory.getLogger(service.class);
 	
@@ -44,5 +47,11 @@ public class service {
 	public void upBook(book book) {
 		bookRepo.save(book);
 		
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

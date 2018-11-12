@@ -29,7 +29,7 @@ import com.onlinetest.OnlineTest.Entity.book;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@Api(value="Books Controller",description="Books Controller")
+@Api(value="Books Controller",description="Books Controller",tags="Book Controller")
 public class BookResource {
 	
 	public static final Logger log=LoggerFactory.getLogger(BookResource.class);

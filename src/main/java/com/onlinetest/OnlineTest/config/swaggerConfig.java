@@ -12,13 +12,14 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static springfox.documentation.builders.PathSelectors.regex;
 
+
 @Configuration
 @EnableSwagger2
 @PropertySource("classpath:swagger.properties")
 public class swaggerConfig {
 	
 	private static final String SWAGGER_API_VERSION="1.0";
-	private static final String LICENCE_TEXT="LICENCE number:-20.40.9.3";
+	private static final String LICENCE_TEXT="LICENCE number: 20.40.9.3";
 	private static final String title="Online Test Application";
 	private static final String description = "Online Test Applications method has been displayed";
 	
