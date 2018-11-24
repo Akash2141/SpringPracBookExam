@@ -14,6 +14,8 @@ import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,10 +39,18 @@ public class BookResource {
 	@Autowired
 	service service;
 	
+	@Autowired
+	BCryptPasswordEncoder encoder;
+	
 	@PostMapping("/books")
 	@ResponseBody
+	@Secured("ROLE_ADMIN")
 	@ApiOperation("store the book Info")
 	public String postBook(@RequestBody book book) {
+		
+		String encPassword=encoder.encode(book.getPassword());
+		book.setPassword(encPassword);
+		
 		service.insert(book);
 		return "I am inserted";
 		
@@ -48,6 +58,7 @@ public class BookResource {
 	
 	@GetMapping("/books")
 	@ResponseBody
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@ApiOperation("Get the List of All the Books")
 	@ApiResponses(
 			value= {
@@ -77,6 +88,9 @@ public class BookResource {
 	@ResponseBody
 	@ApiOperation("Update the Books Info")
 	public void upBook(@RequestBody book book) {
+		
+		String encPassword=encoder.encode(book.getPassword());
+		book.setPassword(encPassword);
 		
 		service.upBook(book);
 		log.info("Successfully updated");

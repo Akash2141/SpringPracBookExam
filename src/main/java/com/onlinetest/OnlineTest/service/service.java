@@ -51,7 +51,10 @@ public class service implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		book book=bookRepo.findByName(username);
+		if(book==null) {
+			throw new UsernameNotFoundException("User not Found");
+		}
+			return new bookDetailsImpl(book);
 	}
 }

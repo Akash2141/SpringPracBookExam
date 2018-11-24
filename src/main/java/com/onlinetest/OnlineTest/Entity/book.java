@@ -1,6 +1,7 @@
 package com.onlinetest.OnlineTest.Entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,10 +25,25 @@ public class book implements Serializable{
 	@Size(min=2,message="name should be greater than 2 character")
 	@ApiModelProperty(notes="name should be have more than 2 character")
 	String name;
+	
+	@Size(min=2,message="password should be greater than 2 character")
+	@ApiModelProperty(notes="password should be have more than 2 character")
+	String password;
 	public book() {
 		super();
 	}
 	
+	
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -42,5 +58,7 @@ public class book implements Serializable{
 	public String getName() {
 		return name;
 	}
-	
+
+
+		
 }
